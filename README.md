@@ -7,6 +7,7 @@ A collection of Bash scripts and Docker Compose configurations to streamline dai
 ```
 /
 ├── scripts/           # Bash utility scripts
+│   ├── get_first_commit.sh
 │   └── select_java_version.sh
 ├── docker/            # Docker Compose files
 └── README.md         # This file
@@ -17,14 +18,6 @@ A collection of Bash scripts and Docker Compose configurations to streamline dai
 ### select_java_version.sh
 
 An interactive Bash script that uses `fzf` and `sdkman` to search and select installed Java versions managed by SDKMAN, then sets the selected version as default.
-
-#### Features
-
-- 🔍 Fuzzy search through installed Java versions
-- 🎯 Interactive selection with fzf
-- ✅ Automatic SDKMAN initialization
-- 🎨 Colored output for better UX
-- ⚡ Quick version switching
 
 #### Prerequisites
 
@@ -42,14 +35,38 @@ chmod +x scripts/select_java_version.sh
 ./scripts/select_java_version.sh
 ```
 
-#### Example Output
+### get_first_commit.sh
 
+A Bash script that retrieves the first commit hash from a Git repository and generates a GitHub link if the remote is GitHub. Supports both local paths and GitHub URLs.
+
+#### Prerequisites
+
+- Git installed
+- Bash shell
+
+#### Usage
+
+```bash
+# Make executable (first time only)
+chmod +x scripts/get_first_commit.sh
+
+# Run with current directory
+./scripts/get_first_commit.sh
+
+# Run with specific path
+./scripts/get_first_commit.sh /path/to/git/repo
+
+# Run with GitHub URL
+./scripts/get_first_commit.sh https://github.com/user/repo
+./scripts/get_first_commit.sh git@github.com:user/repo.git
 ```
-Setting Java version 17.0.9-tem as default...
-Successfully set Java 17.0.9-tem as default.
-Current default Java version:
-openjdk version "17.0.9" 2023-10-17
-...
+
+#### Installation (System-wide)
+
+```bash
+sudo cp scripts/get_first_commit.sh /usr/local/bin/get_first_commit
+sudo chmod +x /usr/local/bin/get_first_commit
+# Then use: get_first_commit [path|url]
 ```
 
 ## 🐳 Docker Compose Files
