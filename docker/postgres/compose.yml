@@ -1,13 +1,12 @@
-version: "3.8"
-
 services:
   postgres:
-    container_name: postgres_container
-    image: postgres
+    container_name: postgres
+    image: postgres:17.6
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
       POSTGRES_DB: ${POSTGRES_DB:-postgres}
+      POSTGRES_HOST_AUTH_METHOD: ${POSTGRES_HOST_AUTH_METHOD:-scram-sha-256}
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
@@ -18,8 +17,8 @@ services:
     restart: unless-stopped
 
   pgadmin:
-    container_name: pgadmin_container
-    image: dpage/pgadmin4
+    container_name: pgadmin
+    image: dpage/pgadmin4:9.8.0
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
